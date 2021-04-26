@@ -2,7 +2,7 @@ import discord
 import os
 
 
-token = os.environ['DISCORD_BOT_TOKEN']
+TOKEN = os.environ['DISCORD_BOT_TOKEN']
 client = discord.Client()
 
 @client.event
