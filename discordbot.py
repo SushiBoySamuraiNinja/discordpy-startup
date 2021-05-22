@@ -1,9 +1,21 @@
 import discord
 import os
-
+import time
+import asyncio
 
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
 client = discord.Client()
+
+async def Clock(N):
+    BaseTime = time.time()
+    while True:
+        CurrentTime = time.time
+        if CurrentTime - BaseTime > N:
+            return "アサダヨ!!"
+        await asyncio.sleep(0.5)
+    return 0
+
+
 
 @client.event
 async def on_ready():
@@ -44,6 +56,11 @@ async def on_message(message):
     # 「/test」と発言したら「にゃーん」が返る処理
     if message.content == '/test':
         await message.channel.send('にゃーん')
+
+    if message.content[0:6] == '!clock':
+        N = int(message.content[6:])
+        say = Clock(N)
+        await message.channel.send(say)
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
